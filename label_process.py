@@ -17,15 +17,26 @@ def get_jpg_filenames():
 jpg_filenames = get_jpg_filenames()
 assert len(jpg_filenames) == len(data['gt_rect']), "The number of .jpg files does not match the length of the gt_rect array."
 
+def normalize(input_array, new_width=640, new_height=512):
+    x_start, y_start, width, height = input_array
+
+    normalized_x_start = x_start / new_width
+    normalized_y_start = y_start / new_height
+    normalized_width = width / new_width
+    normalized_height = height / new_height
+
+    # 返回归一化后的数组
+    return [normalized_x_start, normalized_y_start, normalized_width, normalized_height]
+
 for i, jpg_filename in enumerate(jpg_filenames):
     txt_filename = jpg_filename.replace('.jpg', '.txt')
     rect = data['gt_rect'][i]
-    
+
     # 检查rect是否为空
     if rect:  # 如果不为空
         with open(txt_filename, 'w') as f:
             # 按照指定格式写入内容
-            content = "1 {} {} {} {}".format(*rect)
+            content = "1 {} {} {} {}".format(*normalize(rect))
             f.write(content)
     else:
         with open(txt_filename, 'w') as f:
