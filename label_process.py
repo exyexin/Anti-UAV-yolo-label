@@ -2,7 +2,7 @@ import json
 import os
 
 # 解析JSON数据
-with open('infrared.json', 'r') as f:
+with open('../infrared.json', 'r') as f:
     data = json.load(f)
 
 # 假设有一个函数来获取.jpg文件的名称列表
