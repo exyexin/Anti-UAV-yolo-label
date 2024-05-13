@@ -20,10 +20,10 @@ assert len(jpg_filenames) == len(data['gt_rect']), "The number of .jpg files doe
 def normalize(input_array, new_width=640, new_height=512):
     x_start, y_start, width, height = input_array
 
-    normalized_x_start = x_start / new_width
-    normalized_y_start = y_start / new_height
-    normalized_width = width / new_width
-    normalized_height = height / new_height
+    normalized_x_start = round(x_start / new_width, 6)
+    normalized_y_start = round(y_start / new_height, 6)
+    normalized_width = round(width / new_width, 6)
+    normalized_height = round(height / new_height, 6)
 
     # 返回归一化后的数组
     return [normalized_x_start, normalized_y_start, normalized_width, normalized_height]
