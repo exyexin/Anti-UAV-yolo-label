@@ -17,15 +17,22 @@ if [ ! -f "$PY_SCRIPT" ]; then
 fi
 
 # 遍历当前目录及所有子目录中的.jpg文件
-find . -type f -name "*.jpg" | while read -r jpg_file; do
+find . -type f -name "*.json" | while read -r json_file; do
     # 获取.jpg文件所在的目录
-    file_dir=$(dirname "$jpg_file")
+    file_dir="${json_file%.*}" #目标路径
+    json_file_name=$(basename "$json_file") #json基本文件名
+    type=${json_file_name%.*} #哪个类型
+
+    # echo "type: $type"
+    # echo "file_dir: $file_dir"
+    # echo "json_file_name: $json_file_name"
 
     # 改变到.jpg文件所在的目录
     pushd "$file_dir" > /dev/null
+    # echo ""
 
     # 运行Python脚本
-    python "$PY_SCRIPT"
+    python "$PY_SCRIPT" -p "../$json_file_name"
 
     # 返回原始目录
     popd > /dev/null

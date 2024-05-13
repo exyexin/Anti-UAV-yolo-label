@@ -1,5 +1,6 @@
 import json
 import os
+import argparse
 
 def get_jpg_filenames():
     # 这里应该是获取文件夹中所有.jpg文件名称的逻辑
@@ -20,9 +21,16 @@ def normalize(input_array, new_width=640, new_height=512):
     return [normalized_x_start, normalized_y_start, normalized_width, normalized_height]
 
 
-def process():
+def process(path):
     # 解析JSON数据
-    with open('../infrared.json', 'r') as f:
+    if path == '../infrared.json':
+        width=640
+        height=512
+    else:
+        width=1920
+        height=1080
+
+    with open(path, 'r') as f:
         data = json.load(f)
 
     # 假设有一个函数来获取.jpg文件的名称列表
@@ -40,7 +48,7 @@ def process():
         if rect:  # 如果不为空
             with open(txt_filename, 'w') as f:
                 # 按照指定格式写入内容
-                content = "1 {} {} {} {}".format(*normalize(rect))
+                content = "1 {} {} {} {}".format(*normalize(rect,width,height))
                 f.write(content)
         else:
             with open(txt_filename, 'w') as f:
@@ -50,4 +58,9 @@ def process():
         # 如果rect为空，不创建.txt文件或不写入内容
 
 if __name__ == '__main__':
-    process()
+    parser = argparse.ArgumentParser(description="add path")
+    parser.add_argument('-p','--path')
+    args = parser.parse_args()
+    print(args.path)
+    # process('../infrared.json')
+    process(args.path)
