@@ -3,18 +3,18 @@
 # 此脚本将递归地查找所有.jpg文件的目录，并运行Python脚本以生成.txt文件
 
 # 检查是否提供了Python脚本的路径
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <path_to_python_script>"
-    exit 1
-fi
+# if [ "$#" -ne 1 ]; then
+#     echo "Usage: $0 <path_to_python_script>"
+#     exit 1
+# fi
 
-PY_SCRIPT=$1
+PY_SCRIPT=$(pwd)/label_process.py
 
-# 确保Python脚本存在
-if [ ! -f "$PY_SCRIPT" ]; then
-    echo "Error: Python script not found."
-    exit 1
-fi
+# # 确保Python脚本存在
+# if [ ! -f "$PY_SCRIPT" ]; then
+#     echo "Error: Python script not found."
+#     exit 1
+# fi
 
 # 遍历当前目录及所有子目录中的.jpg文件
 find . -type f -name "*.json" | while read -r json_file; do
