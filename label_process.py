@@ -50,7 +50,7 @@ def process(path):
         if rect:  # 如果不为空
             with open(txt_filename, 'w') as f:
                 # 按照指定格式写入内容
-                content = "1 {} {} {} {}".format(*normalize(rect, width, height))
+                content = "0 {} {} {} {}".format(*normalize(rect, width, height))
                 f.write(content)
         else:
             with open(txt_filename, 'w') as f:
