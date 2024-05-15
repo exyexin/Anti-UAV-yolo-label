@@ -14,8 +14,8 @@ def get_jpg_filenames():
 def normalize(input_array, new_width=640, new_height=512):
     x_start, y_start, width, height = input_array
 
-    normalized_x_start = round((x_start + new_width / 2) / new_width, 6)
-    normalized_y_start = round((y_start + new_height / 2) / new_height, 6)
+    normalized_x_start = round((x_start + width / 2) / new_width, 6)
+    normalized_y_start = round((y_start + height / 2) / new_height, 6)
     normalized_width = round(width / new_width, 6)
     normalized_height = round(height / new_height, 6)
 
